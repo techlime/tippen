@@ -186,8 +186,8 @@ style. Always use a token.
 
 Exceptions:
 
-- The inline SVG favicon in `layout.tsx` (browsers can't read CSS vars
-  from `<link rel="icon">`).
+- The favicon uses `prefers-color-scheme` media queries in `<link rel="icon">`
+  to serve theme-specific PNG logos.
 - The `BACKGROUND_OPTIONS` swatches in `seed.ts` (these mirror the
   `backgroundStyle()` colors — keep them in sync).
 - Test fixtures (rare).

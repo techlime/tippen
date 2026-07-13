@@ -21,7 +21,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Nothing yet.
+- **Logo system:** Replaced inline SVG `TippenLogo` with image-based
+  version that swaps between `tippen-colour.png` (dark mode) and
+  `tippen-light.png` (light mode) via `next-themes`. Added loading state,
+  error fallback to SVG glyph, optional framer-motion reveal animation,
+  and theme-responsive favicon/meta icons. Logo files moved to
+  `public/logo/`.
+- Landing hero: added large semi-transparent background logo with
+  framer-motion reveal animation (visible on lg+ screens).
 
 ### Deprecated
 

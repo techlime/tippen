@@ -216,8 +216,9 @@ use a token:
 <span style={{ color: "var(--ember)" }} />
 ```
 
-The only exception is the SVG favicon inline data URI in `layout.tsx`
-(browsers don't read CSS variables from `<link rel="icon">`).
+Theme-responsive favicons use `prefers-color-scheme` media queries on
+`<link rel="icon">` elements to serve the appropriate logo PNG for each
+theme.
 
 See [STYLE_GUIDE.md](./STYLE_GUIDE.md) §"No hardcoded colors".
 
