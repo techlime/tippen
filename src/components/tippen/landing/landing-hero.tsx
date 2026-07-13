@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CinematicStage } from "@/components/tippen/cinematic-stage";
 import { useEditorStore } from "@/stores/editor-store";
+import { useTheme } from "next-themes";
 import type { Scene } from "@/lib/tippen/types";
 
 const HERO_SCENE: Scene = {
@@ -42,9 +43,13 @@ const HERO_DURATION = 4200;
 
 export function LandingHero() {
   const openEditor = useEditorStore((s) => s.openEditor);
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
   const [playhead, setPlayhead] = React.useState(0);
   const rafRef = React.useRef<number | null>(null);
   const lastRef = React.useRef<number>(0);
+
+  React.useEffect(() => setMounted(true), []);
 
   React.useEffect(() => {
     lastRef.current = performance.now();
@@ -81,6 +86,23 @@ export function LandingHero() {
           }}
         />
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
+
+        {/* Background logo — large, semi-transparent, reveals on load */}
+        {mounted && (
+          <motion.img
+            src={
+              resolvedTheme === "dark"
+                ? "/logo/tippen-colour.png"
+                : "/logo/tippen-light.png"
+            }
+            alt=""
+            aria-hidden
+            initial={{ opacity: 0, scale: 1.2 }}
+            animate={{ opacity: 0.05, scale: 1.5 }}
+            transition={{ duration: 2, ease: "easeOut" }}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:block blur-sm pointer-events-none select-none"
+          />
+        )}
       </div>
 
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">

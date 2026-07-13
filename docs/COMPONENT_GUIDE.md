@@ -53,16 +53,22 @@ Landing subcomponents (planned location: `src/components/tippen/landing/`):
 ### `TippenLogo`
 
 ```tsx
-<TippenLogo className="h-6" />
+<TippenLogo size={28} showWordmark animate />
 ```
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `className` | `string` | — | Height/width overrides |
-| `withCaret` | `boolean` | `true` | Show the blinking caret glyph |
+| `className` | `string` | — | Extra classes |
+| `size` | `number` | `28` | Logo glyph size in px |
+| `showWordmark` | `boolean` | `true` | Show "Tippen" text next to glyph |
+| `animate` | `boolean` | `false` | Fade-in + scale-up reveal via framer-motion |
 
-The logo is a wordmark + animated caret. The caret uses `.caret-blink`
-(disabled under reduced-motion).
+The logo renders the appropriate PNG image based on the current theme
+(`tippen-colour.png` in dark mode, `tippen-light.png` in light mode) via
+`next-themes`. On image load error, it falls back to the original SVG
+caret glyph. A loading skeleton is shown while the image loads.
+`disableTransitionOnChange` on the `ThemeProvider` ensures instant swaps
+with no flash.
 
 ### `CinematicStage`
 
